@@ -10,7 +10,8 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const dbURI = "mongodb+srv://admin:admin@superteam.a1mz3.mongodb.net/test";
+const dbURI = process.env['dbURI'];
+var usersRouter = require('./Routes/users.routes');
 
 app.listen(port);
 console.log('Express app started on port ' + port);
@@ -22,17 +23,19 @@ mongoose
 
 mongoose.Promise = global.Promise;
 
+app.use('/users', usersRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.status(err.status || 404).json({
+  res.status(404).json({
     message: "No such route exists"
   })
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500).json({
+  res.status(err).json({
     message: "Error Message"
   })
 });
-// module.exports = app;
+module.exports = app;
