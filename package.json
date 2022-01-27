@@ -1,0 +1,17 @@
+{
+  "name": "collab_server",
+  "version": "0.0.0",
+  "main": "app.js",
+  "description": "NodeJS backend for collab tool - superteam",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0"
+  }
+}
