@@ -3,13 +3,14 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const passport = require("passport");
-
+var cors = require('cors');
 var app = express();
 const port = process.env.PORT || 3000;
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 const dbURI = process.env['dbURI'];
 var usersRouter = require('./Routes/users.routes');
