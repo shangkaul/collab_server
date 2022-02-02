@@ -14,7 +14,7 @@ app.use(cors());
 
 const dbURI = process.env['dbURI'];
 var usersRouter = require('./Routes/users.routes');
-
+var wsRouter = require('./Routes/ws.routes');
 mongoose
 	.connect(dbURI)
 	.then(() => console.log("Database Connected"))
@@ -31,6 +31,7 @@ app.listen(port);
 console.log('Express app started on port ' + port);
 
 app.use('/users', usersRouter);
+app.use('/ws', wsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
