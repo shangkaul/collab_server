@@ -20,7 +20,6 @@ const findWs=async(req,res) =>{
   const id = mongoose.Types.ObjectId(req.body.user_id);
   console.log(id)
   ws.find({ memberList:{$in:[id]} }).then(ws => {
-    // Check if user exists
     if (!ws) {
       return res.status(200).json({ wsList: [] });
     }
