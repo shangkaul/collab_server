@@ -60,7 +60,7 @@ io.on('connection', (socket) => { /* socket object may be used to send specific 
       console.log(id);
 });
 socket.on("refresh_task",(id)=>{
-      socket.broadcast.emit("client_refresh");
+      io.emit("client_refresh");
       console.log("client_refresh_called");
 
       });
