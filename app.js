@@ -6,10 +6,15 @@ const passport = require("passport");
 var cors = require('cors');
 var app = express();
 const port = process.env.PORT || 3000;
-// const socketIo = require("socket.io");
-// var http=require('https');
 
-
+const server=require("http").Server(app);
+// const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -37,31 +42,30 @@ app.use('/users', usersRouter);
 app.use('/ws', wsRouter);
 app.use('/task', taskRouter);
 
-// const server = http.createServer(app);
-// const io = socketIo(server); 
 
-// let interval;
 
-// io.on("connection", (socket) => {
-//   console.log("New client connected");
-//   if (interval) {
-//     clearInterval(interval);
-//   }
-//   interval = setInterval(() => getApiAndEmit(socket), 1000);
-//   socket.on("disconnect", () => {
-//     console.log("Client disconnected");
-//     clearInterval(interval);
-//   });
-// });
 
-// const getApiAndEmit = socket => {
-//   const response = new Date();
-//   // Emitting a new message. Will be consumed by the client
-//   socket.emit("FromAPI", response);
-// };
 
-app.listen(port);
-console.log('Express app started on port ' + port);
+
+
+server.listen(8080,() => console.log("http server start"));
+
+// app.listen(port);
+// console.log('Express app started on port ' + port);
+io.on('connection', (socket) => { /* socket object may be used to send specific messages to the new connected client */
+
+    console.log('new client connected');
+    socket.on("ws",(id)=>{
+      console.log("ws")
+      console.log(id);
+});
+socket.on("refresh_task",(id)=>{
+      socket.broadcast.emit("client_refresh");
+      console.log("client_refresh_called");
+
+      });
+});
+
 
 
 // catch 404 and forward to error handler
