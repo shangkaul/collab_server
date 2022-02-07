@@ -47,7 +47,8 @@ app.use('/task', taskRouter);
 
 
 
-
+server.timeout = 0;
+app.timeout = 0;
 server.listen(8080,() => console.log("http server start"));
 
 // app.listen(port);

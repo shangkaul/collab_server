@@ -29,5 +29,22 @@ const findWs=async(req,res) =>{
   });
 }
 
+const addWs=async(req,res) =>{
+  const newWs = new ws({
+    name:req.body.name,
+    memberList:[mongoose.Types.ObjectId(req.body.user_id)],
+    taskList: []
+  });
+  if(req.body.name!="")
+  {
+    newWs.save()
+            .then(item => res.json(item))
+            .catch(err => console.log(err));
+  }
+  else
+  {
+    res.status(501);
+  }
+}
 
-module.exports = { getAll,findWs };
+module.exports = { getAll,findWs,addWs };
