@@ -1,17 +1,27 @@
 {
   "name": "collab_server",
   "version": "0.0.0",
-  "main": "app.js",
+  "main": "index.js",
   "description": "NodeJS backend for collab tool - superteam",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js",
+    "server": "nodemon app.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "http": "^0.0.1-security",
     "http-errors": "^2.0.0",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^4.4.1",
+    "validator": "^13.7.0"
   }
 }
